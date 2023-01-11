@@ -1,0 +1,4 @@
+gcc -c compilation3.c -o compilation3.o
+gcc -c compilation3main.c -o compilation3main.o
+gcc compilation3.c compilation3main.c -o compilation3main.exe
+./compilation3main.exe

@@ -1,0 +1,2 @@
+gcc compilation4.c -lm -o compilation4.exe
+./compilation4.exe

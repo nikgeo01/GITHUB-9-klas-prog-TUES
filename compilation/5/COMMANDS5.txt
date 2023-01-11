@@ -1,0 +1,4 @@
+gcc -c maths.c -o maths.o
+ar rcs libmath.a maths.o
+gcc compilation5main.c -L. -lmath -o compilation5main.exe
+./compilation5main.exe
