@@ -3,10 +3,12 @@
 #include <limits.h>
 #include <string.h>
 
+int processescount = 0;
+struct Process processes[MAX_PROCESSES];
 
 static int nextprocessid()
 {
-    static unsigned int id = 0;
+    static unsigned int id = 1;
     if (id == UINT_MAX)
     {
         return 0;
@@ -18,37 +20,37 @@ static int nextprocessid()
 }
 void createnewprocess(char *name)
 {
-    processescount++;
-    processes[processescount].id = nextprocessid();
-    if (processes[processescount].id == 0)
+    struct Process newProcess;
+    newProcess.id = nextprocessid();
+    strcpy(newProcess.name, name);
+    if (newProcess.id == 0)
     {
-        printf("No more processes can be created");
-        processescount--;
+        printf("No more processes can be created\n");
     }
     else
     {
-        strcpy(processes[processescount].name, name);
-        printf("New process created with id %d and name '%s'", processes[processescount].id, processes[processescount].name);
+        processes[processescount] = newProcess;
+        processescount++;
+        printf("New process created with id %d and name '%s'\n", newProcess.id, newProcess.name);
     }
 }
 void stopprocess(int id)
 {
-    int DelIndex;
+    int DELindex;
     for (int i = 0; i < processescount; i++)
     {
         if (processes[i].id == id)
         {
-            DelIndex = i;
+            DELindex = i;
         }
     }
-    if (DelIndex < processescount)
+    for (int i = DELindex; i < processescount; i++)
     {
-        struct Process temp;
-        temp = processes[processescount];
-        processes[processescount] = processes[DelIndex];
-        processes[DelIndex] = temp;
+        processes[i] = processes [i+1];
     }
+
     processescount--;
+
 }
 void printprocesses()
 {

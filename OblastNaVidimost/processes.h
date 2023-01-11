@@ -11,7 +11,7 @@ struct Process
 };
 
 extern struct Process processes[MAX_PROCESSES];
-int processescount = 0;
+extern int processescount;
 
 void createnewprocess();
 void stopprocess();
