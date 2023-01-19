@@ -4,7 +4,7 @@
 int main()
 {
 
-     while (1)
+    while (1)
     {
         int option;
         printf("1. Turn on light\n2. Turn off light\n3. Switch light\n4. Print light state\n5. Print robot state\n6. Exit\n");
@@ -32,7 +32,7 @@ int main()
                 printf("Light state: %d\n", isbitset(chosenBit));
                 break;
             case 5:
-                printf("Robot state: %d\n", getbitstate());
+                printf("Robot state: %u\n", getbitstate());
                 break;
             case 6:
                 printf("Exiting...\n");

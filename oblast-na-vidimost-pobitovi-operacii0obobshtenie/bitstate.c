@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "bitstate.h"
 
 static unsigned int bitstate;
 
