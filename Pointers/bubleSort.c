@@ -15,6 +15,7 @@ int main()
         printf("%d ", arr[i]);
     }
     printf("\n");
+    
     bubblesort(arr, len, comparedesc);
     for (int i = 0; i < len; i++)
     {
@@ -30,9 +31,9 @@ void bubblesort (int *arr, int len, int (*compare)(void *, void *))
 
     for (int i = 0; i < len-1; i++)
     {
-        for (int j = 0; j < len-j-1; j++)
+        for (int j = 0; j < len-1; j++)
         {
-            if (compare(&arr[j], &arr[j+1] > 0))
+            if (compare(&arr[j], &arr[j+1]) > 0)
             {
                 int temp = arr[j];
                 arr[j] = arr[j+1];
