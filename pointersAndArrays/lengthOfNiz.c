@@ -4,7 +4,7 @@ void length (char *p);
 
 int main()
 {
-    char str[5] = "abcde";
+    char str[] = "abcde";
     char *ptr = str;
 
     return 0;

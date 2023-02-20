@@ -1,24 +1,23 @@
 #include <stdio.h>
 
-strhalf(char * str, char ** p);
+void strhalf(char * str, char ** p);
 
 int main()
 {
-
-    char str[5] = "abcde";
-    char *ptr = str;
+    char str[] = "abcde";
     char *p;
-    strhalf(ptr, &p);
+    strhalf(str, &p);
+    printf("The second half of the string is:%s\n", p);
     
     return 0;
 }
-strhalf(char * str, char ** p)
+void strhalf(char * str, char ** p)
 {
+    char *pstr;
     int len = 0;
-    while (*str != '\0')
+    for (pstr = str; *pstr != '\0'; pstr++)
     {
         len++;
-        str = str + 1;
     }
     *p = str + len / 2;
 }

@@ -6,7 +6,7 @@ void sort (int * arr, int len);
 int main()
 {
 
-    int arr[5] = {1, 5, 3, 2, 4};
+    int arr[] = {1, 5, 3, 2, 4};
     int *parr = arr;
     sort(parr, 5);
     for (int i = 0; i < 5; i++)
