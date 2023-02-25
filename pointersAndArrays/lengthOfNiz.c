@@ -6,6 +6,7 @@ int main()
 {
     char str[] = "abcde";
     char *ptr = str;
+    length(ptr);
 
     return 0;
 }
