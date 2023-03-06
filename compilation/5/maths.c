@@ -1,4 +1,3 @@
-
 #include "math.h"
 
 int factoriel(int x)
