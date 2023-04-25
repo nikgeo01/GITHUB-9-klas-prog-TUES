@@ -120,3 +120,12 @@ void release(DynamicArray *arr){
     arr->capacity = 0;
     arr->size = 0;
 }
+void printdynarr(DynamicArray *arr)
+{
+    for (int i = 0; i < arr->size; i++)
+    {
+        int currel = getelement(arr, i);
+        printf("%d ", currel);
+    }
+    printf("\n");
+}

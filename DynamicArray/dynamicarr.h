@@ -19,6 +19,7 @@ void setelement(DynamicArray *arr, int index, double value);
 double getelement(DynamicArray *arr, int index);
 void removeelement(DynamicArray *arr, int index);
 int findelement(DynamicArray *arr, int value);
+void printdynarr(DynamicArray *arr);
 
 void release(DynamicArray *arr);
 
