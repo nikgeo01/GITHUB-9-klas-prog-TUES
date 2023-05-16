@@ -4,14 +4,16 @@
 
 static struct ListNode *createnode(double value)
 {
-    struct ListNode *newnode = (struct ListNode *)malloc(sizeof(struct ListNode));
-    if (newnode == NULL)
+    struct ListNode *node = malloc(sizeof(struct ListNode));
+    if(node == NULL)
     {
-        printf("Error allocating memory \n");
+        printf("Error allocating memmory\n");
         exit(1);
     }
-    newnode->value = value;
-    return newnode;
+    node->value = value;
+    node->next = NULL;
+    node->prev = NULL;
+    return node;
 }
 
 LinkedList init()
@@ -27,14 +29,14 @@ struct ListNode *get(LinkedList *list, int index)
 {
     if (index < 0 || index >= list->size)
     {
-        return NULL;
+        printf("Index out of bounds\n");
+        exit(1);
     }
     struct ListNode *current = list->head;
     for (int i = 0; i < index; i++)
     {
         current = current->next;
     }
-
     return current;
 }
 
@@ -43,18 +45,21 @@ void push(LinkedList *list, int index, double value)
     if (index == 0)
     {
         pushfront(list, value);
-        return;
     }
-    if (index == list->size)
+    else if (index == list->size)
     {
         pushback(list, value);
-        return;
     }
-    struct ListNode *prevnode = get(list, index - 1);
-    struct ListNode *newnode = createnode(value);
-    newnode->next = prevnode->next;
-    prevnode->next = newnode;
-    list->size++;
+    else
+    {
+        struct ListNode *prevnode = get(list, index - 1);
+        struct ListNode *newnode = createnode(value);
+        newnode->next = prevnode->next;
+        newnode->prev = prevnode;
+        prevnode->next->prev = newnode;
+        prevnode->next = newnode;
+        list->size++;
+    }
 }
 
 void pushback(LinkedList *list, double value)
@@ -68,6 +73,7 @@ void pushback(LinkedList *list, double value)
     {
         list->tail->next = newnode;
     }
+    newnode->prev = list->tail;
     list->tail = newnode;
     list->size++;
 }
@@ -80,6 +86,10 @@ void pushfront(LinkedList *list, double value)
     if (list->size == 0)
     {
         list->tail = newnode;
+    }
+    else
+    {
+        list->head->next->prev = newnode;
     }
     list->size++;
 }
