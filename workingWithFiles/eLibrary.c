@@ -1,13 +1,7 @@
 #include <stdio.h>
-
-typedef struct Book
-{
-    char bookName[100];
-    char genre[100];
-    int yearPublished;
-    char authorName[100];
-    char ISBN[100];
-} Book;
+#include <string.h>
+#include <stdlib.h>
+#include "book.h"
 
 typedef struct Node
 {
@@ -76,38 +70,60 @@ void saveToFile(LinkedList *list)
     fclose(LibraryFile);
 }
 
-void transferToList(LinkedList *list)
-{
-    FILE *LibraryFile = fopen("Library.txt", "r");
-    if (LibraryFile == NULL)
-    {
-        printf("Error opening file\n");
-        return;
-    }
-    char c;
-    
 
-    fclose(LibraryFile);
-}
 
 int main()
 {
     LinkedList list;
 
-    FILE *LibraryFile = fopen("Library.txt", "r");
-    if (LibraryFile == NULL)
+    FILE *file = fopen("Library.txt", "r");
+    if (file == NULL)
     {
         printf("Error opening file\n");
-        return 1;
+        exit(1);
     }
-    char c;
-    while ((c = fgetc(LibraryFile)) != EOF)
+    char line[100];
+
+    while (fgets(line, 100, file) != NULL)
     {
-        printf("%c", c);
+        Book *book = (Book *)malloc(sizeof(Book));
+        if (book == NULL)
+        {
+            printf("Error allocating memory\n");
+            exit(1);
+        }
+        char *token = strtok(line, ",");
+        book->ISBN = atoi(token);
+        token = strtok(NULL, ",");
+        book->name = (char *)malloc(strlen(token) + 1);
+        if (book->name == NULL)
+        {
+            printf("Error allocating memory\n");
+            exit(1);
+        }
+        strcpy(book->name, token);
+        token = strtok(NULL, ",");
+        book->authorName = (char *)malloc(strlen(token) + 1);
+        if (book->authorName == NULL)
+        {
+            printf("Error allocating memory\n");
+            exit(1);
+        }
+        strcpy(book->authorName, token);
+        token = strtok(NULL, ",");
+        book->genre = (char *)malloc(strlen(token) + 1);
+        if (book->genre == NULL)
+        {
+            printf("Error allocating memory\n");
+            exit(1);
+        }
+        strcpy(book->genre, token);
+        token = strtok(NULL, ",");
+        book->year = atoi(token);
+        pushback(&list, book);
     }
 
-    fclose(LibraryFile);
-
+    
     printf("\n\n");
     printf("Choose option:\n");
     printf("0. Save changes and exit\n");
