@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "employee.h"
 
-struct Employee
-{
-    char name[50];
-    int numEmployees;
-    struct Employee **employees;
-};
 
 void serializeEmployee(FILE *file, struct Employee *employee)
 {
